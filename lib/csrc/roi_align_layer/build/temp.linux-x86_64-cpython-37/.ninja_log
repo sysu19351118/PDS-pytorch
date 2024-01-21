@@ -1,0 +1,4 @@
+# ninja log v5
+1	11896	1675997119675944592	/data/tzx/snake/lib/csrc/roi_align_layer/build/temp.linux-x86_64-cpython-37/data/tzx/snake/lib/csrc/roi_align_layer/cuda/ROIAlign_cuda.o	8c56fca9874496b7
+0	20252	1675997128027843332	/data/tzx/snake/lib/csrc/roi_align_layer/build/temp.linux-x86_64-cpython-37/data/tzx/snake/lib/csrc/roi_align_layer/cpu/ROIAlign_cpu.o	7fd4bcdc0948f548
+1	24264	1675997132031794273	/data/tzx/snake/lib/csrc/roi_align_layer/build/temp.linux-x86_64-cpython-37/data/tzx/snake/lib/csrc/roi_align_layer/vision.o	9ff3cec9bf1e015f

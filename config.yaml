@@ -1,0 +1,35 @@
+model: 'sbd'
+network: 'ro_34'
+evolution_num: 3
+task: 'snake'
+resume: true
+ff_num: 0
+circle_rate: 1.0
+layer1rate: [0.0, 0.25]
+ifmultistage: True
+isrec: False
+ct_weight: 1.0
+wh_weight: 0.1
+replace_box: True
+
+
+model_dir: "./data/model/train"
+data_path: "/data/tzx/data/MRSpine/1258data"
+
+gpus: (3,4)
+
+train:
+    optim: 'adam'
+    lr: 1e-4
+    milestones: (80, 120)
+    gamma: 0.2
+    batch_size: 2
+    dataset: 'MedicalTrain'
+    num_workers: 0
+    epoch: 150
+test:
+    dataset: 'MedicalTest'
+    batch_size: 8
+
+heads: {'ct_hm': 1, 'wh': 2}
+segm_or_bbox: 'segm'

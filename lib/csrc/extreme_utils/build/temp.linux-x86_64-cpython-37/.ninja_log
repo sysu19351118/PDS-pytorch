@@ -1,0 +1,4 @@
+# ninja log v5
+0	12031	1675996368658665154	/data/tzx/snake/lib/csrc/extreme_utils/build/temp.linux-x86_64-cpython-37/data/tzx/snake/lib/csrc/extreme_utils/src/nms.o	96ece70217737dde
+1	12356	1675996368986673014	/data/tzx/snake/lib/csrc/extreme_utils/build/temp.linux-x86_64-cpython-37/data/tzx/snake/lib/csrc/extreme_utils/src/utils.o	4881b352aa1f0705
+1	26575	1675996383199003813	/data/tzx/snake/lib/csrc/extreme_utils/build/temp.linux-x86_64-cpython-37/data/tzx/snake/lib/csrc/extreme_utils/utils.o	5d3239440a336996
