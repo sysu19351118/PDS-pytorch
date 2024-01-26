@@ -140,7 +140,7 @@ class Dataset(data.Dataset):
 
 
         self.img_paths=[]
-        img_names = os.listdir(cfg.demo_path)
+        img_names = os.listdir(cfg.data_path)
         self.img_paths = []
         self.mask_paths = []
         
@@ -149,8 +149,8 @@ class Dataset(data.Dataset):
         
 
         for i in range(int(img_num)):
-            self.img_paths.append(cfg.demo_path+"/"+str(i)+'_image.jpg')
-            self.mask_paths.append(cfg.demo_path+"/"+str(i)+'_mask.jpg')
+            self.img_paths.append(cfg.data_path+"/"+str(i)+'_image.jpg')
+            self.mask_paths.append(cfg.data_path+"/"+str(i)+'_mask.jpg')
 
         #randnum = random.randint(90, 100)
         #random.seed(randnum)
