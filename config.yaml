@@ -13,10 +13,10 @@ wh_weight: 0.1
 replace_box: True
 
 
-model_dir: "./data/model/train"
-data_path: "/data/tzx/data/MRSpine/1258data"
+model_dir: "path/to/save/model"
+data_path: "path/to/dataset"
 
-gpus: (3,4)
+gpus: (0,1)
 
 train:
     optim: 'adam'
