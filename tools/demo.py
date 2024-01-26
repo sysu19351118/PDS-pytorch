@@ -54,86 +54,6 @@ def calculate_iou_from_mask_and_box(mask, detected_box):
     iou = inter_area / union_area if union_area != 0 else 0
     return iou
 
-def save_histogram(data_list1, data_list2, file_path, bins=30):
-    data1 = np.array(data_list1)
-    data2 = np.array(data_list2)
-
-    # Calculate the 25th and 75th percentiles to get the middle 70% of the data
-    lower_percentile1, upper_percentile1 = np.percentile(data1, [0, 100])
-    lower_percentile2, upper_percentile2 = np.percentile(data2, [5, 100])
-
-    # Filter data to include only the middle 70%
-    filtered_data1 = data1[(data1 >= lower_percentile1) & (data1 <= upper_percentile1)]
-    filtered_data2 = data2[(data2 >= lower_percentile2) & (data2 <= upper_percentile2)]
-
-    # Calculate mean and variance for each filtered dataset
-    mean1, var1 = np.mean(filtered_data1), np.var(filtered_data1)
-    mean2, var2 = np.mean(filtered_data2), np.var(filtered_data2)
-
-    # Define the common bins based on the combined range of both filtered datasets
-    combined_range = [min(min(filtered_data1), min(filtered_data2)), max(max(filtered_data1), max(filtered_data2))]
-    bins = np.linspace(combined_range[0], combined_range[1], bins)
-
-    # Create histograms for both data sets with aligned bins
-    plt.hist(filtered_data1, bins=bins, color='blue', alpha=0.5, rwidth=0.85, label='Bounding box IoU')
-    plt.hist(filtered_data2, bins=bins, color='red', alpha=0.5, rwidth=0.85, label='Segmentation IoU')
-    plt.grid(axis='y', alpha=0.75)
-    plt.xlabel('Value')
-    plt.ylabel('Frequency')
-    plt.legend(loc='upper right')
-
-
-    # Save the histogram to the specified file path in PDF format
-    plt.tight_layout()
-
-    plt.savefig(file_path, format='pdf')
-
-    # Clear the current plot to avoid overlap with any future plots
-    plt.clf()
-
-def save_one_histogram(data_list1, file_path):
-
-    data1 = np.array(data_list1)
-
-    # Calculate the 25th and 75th percentiles to get the middle 70% of the data
-
-
-    # Calculate mean and variance for each filtered dataset
-
-    # Define the common bins based on the combined range of both filtered datasets
-
-    # Create histograms for both data sets with aligned bins
-    plt.hist(data1, bins='auto', color='blue', alpha=0.7, rwidth=0.85)
-    plt.grid(axis='y', alpha=0.75)
-    plt.xlabel('Bounding box IoU')
-    plt.ylabel('Frequency')
-
-
-    # Ensure the file path ends with .pdf
-
-
-    # Save the histogram to the specified file path in PDF format
-    plt.tight_layout()
-
-    plt.savefig(file_path, format='pdf')
-
-    # Clear the current plot to avoid overlap with any future plots
-    plt.clf()
-
-
-def draw_and_save_boxplot(data, save_path):
-    # 创建箱线图
-    plt.figure(figsize=(10, 6))
-    plt.boxplot(data,showfliers=False)
-    plt.title("Box Plot")
-    plt.ylabel("IoU of bounding box")
-
-    # 保存箱线图
-    plt.savefig(save_path)
-
-    # 关闭图表，释放内存
-    plt.close()
-
 class Dataset(data.Dataset):
     def __init__(self):
         super(Dataset, self).__init__()
@@ -151,12 +71,6 @@ class Dataset(data.Dataset):
         for i in range(int(img_num)):
             self.img_paths.append(cfg.data_path+"/"+str(i)+'_image.jpg')
             self.mask_paths.append(cfg.data_path+"/"+str(i)+'_mask.jpg')
-
-        #randnum = random.randint(90, 100)
-        #random.seed(randnum)
-        #random.shuffle(self.img_paths)
-        #random.seed(randnum)
-        #random.shuffle(self.mask_paths)
 
         self.ff_num = int(cfg.ff_num)
         self.train_img_path = []
@@ -306,14 +220,6 @@ def demo():
         biou = calculate_iou_from_mask_and_box(gt_mask, output["detection"][0])
         bbox_iou_list.append(biou)
 
-        # 这里是rebuttal用的可视化代码
-
-        # img1 = cv2.imread(path)
-        # img1 = cv2.rectangle(img1, (int(output["detection"][0,0].cpu().item()), int(output["detection"][0,1].cpu().item())), (int(output["detection"][0,2].cpu().item()), int(output["detection"][0,3].cpu().item())), (255,0,255), 2)
-        # cv2.imwrite('/data/tzx/snake_envo_num/visual_result/bbox/' + "bbox_"+os.path.basename(path), img1)
-
-        # img1 = cv2.imread(path)
-        # draw_and_save(output['it_py'], img1, '/data/tzx/snake_envo_num/visual_result/initial_contour/'+os.path.basename(path) )
   
 
         ioudict[os.path.basename(gt_mask_path)]=str(biou)+"_"+str(cal_iou(mask, gt_mask))
@@ -331,9 +237,6 @@ def demo():
         #     continue
         
     fangcha, max1,min1 = calculate_stats_np(bbox_iou_list)
-    draw_and_save_boxplot(bbox_iou_list, '/data/tzx/snake_envo_num/visual_result/Q4_box_MRAVBCE.jpg')
-    save_histogram(bbox_iou_list, seg_iou_list, '/data/tzx/snake_envo_num/visual_result/Q4_zhifang_MRAVBCE.pdf')
-    # save_one_histogram(bbox_iou_list, '/data/tzx/snake_envo_num/visual_result/Q4_zhifang_MRAVBCE.pdf')
     print("mean iou is :",iousum/img_num)
     print("mean dice is :",dice_sum/img_num)
     print("mean boundf is :",fbound_sum/img_num)
