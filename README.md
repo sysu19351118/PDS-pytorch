@@ -24,16 +24,17 @@ unzip Verse20.zip -d ./data/dataset/Verse20
 2. Change 'data_path' to './data/MRSpineSeg'
 3. Run the code:
 ```bash
-python train_net.py"
+python train_net.py
 ```
 ### Training on Verse
-1. Change the 'model_dir' in ./config.yaml to './data/model/Verse';
+1. Change the 'model_dir' in ./config.yaml to './data/model/Verse20';
 2. Change 'data_path' to './data/dataset/MRSpineSeg'
 3. Run the code:
 ```bash
-python train_net.py"
+python train_net.py
 ```
 ## Testing
+
 
 
 ## Acknowledgment
