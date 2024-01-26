@@ -34,7 +34,9 @@ python train_net.py
 python train_net.py
 ```
 ## Testing
-
+```bash
+python test.py
+```
 
 
 ## Acknowledgment
